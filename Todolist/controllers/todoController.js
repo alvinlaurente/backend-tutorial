@@ -25,27 +25,34 @@ const urlencodedParser = bodyParser.urlencoded({extended: true});
 
 module.exports = function(app){
   // View or Read
-  app.get('/todo', function(req, res){
+  app.get('/', (req, res) => {
+    Todo.find({}, (err, data) => {
+      if (err) throw err;
+      res.render('todo', {todo: data});
+    })
+  })
+
+  app.get('/todo', (req, res) => {
     // Get data from MongoDB and pass it to view
-    Todo.find({}, function(err, data){
+    Todo.find({}, (err, data) => {
       if (err) throw err;
       res.render('todo', {todo: data});
     });
   });
 
   // Add
-  app.post('/todo', urlencodedParser,function(req, res){
+  app.post('/todo', urlencodedParser, (req, res) => {
     // Get data from the view and add it to MongoDB
-    Todo(req.body).save(function(err, data){
+    Todo(req.body).save((err, data) => {
       if (err) throw err;
       res.redirect('todo');
     });
   });
 
   // Delete
-  app.delete('/todo/:item', function(req, res){
+  app.delete('/todo/:item', (req, res) => {
     // Delete requested item from MongoDB
-    Todo.find({item: req.params.item.replace(/^\s+|\s+$/gm,"")}).deletOne(function(err, data){
+    Todo.find({item: req.params.item.replace(/^\s+|\s+$/gm,"")}).deleteOne((err, data) => {
       if (err) throw err;
       res.send(data);
     })
