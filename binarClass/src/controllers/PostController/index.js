@@ -26,9 +26,39 @@ class PostController {
     return res.status(200).json({ data: filteredData })
   }
 
-  static add = (req, res) => {
+  static getIndexView = (req, res) => {
+    res.render('posts')
+  }
+
+  static getCreateView = (req, res) => {
+    res.render('posts/create')
+  }
+
+  static getEditView = (req, res) => {
+    res.render('posts/edit')
+  }
+
+  static create = (req, res) => {
     const { id } = req.body
     const post = data.find((obj) => obj.id === parseInt(id, 10))
+
+    if (post) {
+      return res.status(400).json({ message: 'id is already exist' })
+    }
+
+    data.push(req.body)
+
+    return fs.writeFile(
+      filePath,
+      JSON.stringify(data),
+      'utf-8',
+      () => res.status(201).json({ message: `Successfully saved on ${filePath}` }),
+    )
+  }
+
+  static postPosts = (req, res) => {
+    const { id } = req.body
+    const post = data.find((obj) => obj.id === id)
 
     if (post) {
       return res.status(400).json({ message: 'id is already exist' })
@@ -63,6 +93,25 @@ class PostController {
     //     post[key] = req.body[key]
     //   }
     // })
+
+    return fs.writeFile(
+      filePath,
+      JSON.stringify(data),
+      'utf-8',
+      () => res.status(200).json({ success: true, message: 'data updated', data: req.body }),
+    )
+  }
+
+  static editPosts = (req, res) => {
+    const { id, title, author } = req.body
+    const post = data.find((obj) => obj.id === id)
+
+    if (!post) {
+      return res.status(404).json({ message: 'Not Found' })
+    }
+
+    post.title = title || post.title
+    post.author = author || post.author
 
     return fs.writeFile(
       filePath,

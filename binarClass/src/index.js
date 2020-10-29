@@ -1,12 +1,18 @@
 import express from 'express'
-import PostController from './controllers/PostController'
+import apis from './routes/apis'
+import views from './routes/views'
+
+require('dotenv').config()
 
 const app = express()
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(express.static('public'))
 
-app.get('/posts', PostController.get)
-app.post('/posts', PostController.add)
-app.patch('/posts/:id', PostController.update)
-app.delete('/posts/:id', PostController.delete)
+app.set('view engine', 'ejs')
+app.set('views', 'src/views')
 
-app.listen(3000, () => console.log('Running on localhost:3000/'))
+app.use('/', views)
+app.use('/apis', apis)
+
+app.listen(3000, () => console.log('running'))
