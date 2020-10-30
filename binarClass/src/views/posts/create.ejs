@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <form action="/create" id="formPost">
+  <form action="" id="formPost">
     <label for="id">Id:</label>
     <input type="text" id="id" name="id"><br>
     <label for="title">Title:</label>
@@ -24,18 +24,18 @@
   <script>
     $('#submit').on('click', () => {
       const formData = $('#formPost').serialize()
-      $.ajax({
-        type: 'POST',
-        url: '/create',
-        data: formData,
-        contentType: 'application/x-www-form-urlencoded; charset=UTF-8'
-      });
+      // $.ajax({
+      //   type: 'POST',
+      //   url: '/create',
+      //   data: formData,
+      //   contentType: 'application/x-www-form-urlencoded; charset=UTF-8'
+      // });
 
       // Alternative 2 using XHR
-      // const XHR = new XMLHttpRequest();
-      // XHR.open('POST', '/edit');
-      // XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
-      // XHR.send(formData);
+      const XHR = new XMLHttpRequest();
+      XHR.open('POST', '/create');
+      XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
+      XHR.send(formData);
     })
   </script>
 </body>

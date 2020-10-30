@@ -27,10 +27,11 @@ class PostController {
   }
 
   static getIndexView = (req, res) => {
-    res.render('posts')
+    res.render('posts', { data });
   }
 
   static getCreateView = (req, res) => {
+    // console.log(data);
     res.render('posts/create')
   }
 
@@ -70,7 +71,7 @@ class PostController {
       filePath,
       JSON.stringify(data),
       'utf-8',
-      () => res.status(201).json({ message: `Successfully saved on ${filePath}` }),
+      () => res.status(201).render('posts'),
     )
   }
 
@@ -117,7 +118,7 @@ class PostController {
       filePath,
       JSON.stringify(data),
       'utf-8',
-      () => res.status(200).json({ success: true, message: 'data updated', data: req.body }),
+      () => res.status(200).redirect('posts/edit'),
     )
   }
 

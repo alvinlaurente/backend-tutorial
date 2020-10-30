@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "title": "Harpot eps1",
+    "title": "Harpot eps.1",
     "author": "J K Rowling"
   },
   {
@@ -16,7 +16,42 @@
   },
   {
     "id": "4",
-    "title": "Harpot Eps.4",
+    "title": "Harpot eps.4",
     "author": "J K Rowling"
+  },
+  {
+    "id": "5",
+    "title": "Harpot eps.5",
+    "author": "J K Rowling"
+  },
+  {
+    "id": "6",
+    "title": "Harpot eps.6",
+    "author": "J K Rowling"
+  },
+  {
+    "id": "7",
+    "title": "Harpot eps.7",
+    "author": "J K Rowling"
+  },
+  {
+    "id": "8",
+    "title": "Avengers Assemble",
+    "author": "Marvel"
+  },
+  {
+    "id": "9",
+    "title": "Thor",
+    "author": "Marvel"
+  },
+  {
+    "id": "10",
+    "title": "Transformers",
+    "author": "Michael Bay"
+  },
+  {
+    "id": "11",
+    "title": "The Hobbit",
+    "author": "Peter Jackson"
   }
 ]
